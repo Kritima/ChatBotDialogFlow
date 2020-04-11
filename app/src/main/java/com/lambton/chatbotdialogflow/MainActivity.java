@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements AIListener {
 
         // Show results in TextView.
         resultTextView.setText("Query:" + result.getResolvedQuery() +
+                "\nResponse: " + response.getResult().getFulfillment().getSpeech()+
                 "\nAction: " + result.getAction() +
                 "\nParameters: " + parameterString);
 
@@ -153,4 +154,6 @@ public class MainActivity extends AppCompatActivity implements AIListener {
             }
         }
     }
+
+
 }
