@@ -3,6 +3,11 @@ package com.lambton.chatbotdialogflow;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+
+import com.google.gson.JsonElement;
+
+import java.util.Map;
 
 import ai.api.AIListener;
 import ai.api.android.AIConfiguration;
@@ -30,9 +35,14 @@ public class MainActivity extends AppCompatActivity implements AIListener {
 
     }
 
-    @Override
-    public void onResult(AIResponse result) {
+    public void listenButtonOnClick(final View view) {
+        aiService.startListening();
+    }
 
+    @Override
+    public void onResult(final AIResponse response) {
+
+        
     }
 
     @Override
