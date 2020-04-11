@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.gson.JsonElement;
 
@@ -19,11 +21,16 @@ import ai.api.model.Result;
 public class MainActivity extends AppCompatActivity implements AIListener {
 
     private AIService aiService;
+    Button listenButton;
+    private TextView resultTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        listenButton = findViewById(R.id.button);
+        resultTextView = findViewById(R.id.textView);
 
         final AIConfiguration config = new AIConfiguration("e194dd6256564e10a03f2e07db49619d",
                 AIConfiguration.SupportedLanguages.English,
@@ -60,7 +67,8 @@ public class MainActivity extends AppCompatActivity implements AIListener {
     }
 
     @Override
-    public void onError(AIError error) {
+    public void onError(final AIError error) {
+        resultTextView.setText(error.toString());
 
     }
 
