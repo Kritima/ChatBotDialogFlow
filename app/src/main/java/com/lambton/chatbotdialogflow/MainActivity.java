@@ -24,6 +24,9 @@ public class MainActivity extends AppCompatActivity implements AIListener {
                 AIConfiguration.SupportedLanguages.English,
                 AIConfiguration.RecognitionEngine.System);
 
+        aiService = AIService.getService(this, config);
+        aiService.setListener(this);
+
 
     }
 
