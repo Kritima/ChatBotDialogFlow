@@ -42,7 +42,21 @@ public class MainActivity extends AppCompatActivity implements AIListener {
     @Override
     public void onResult(final AIResponse response) {
 
-        
+        Result result = response.getResult();
+
+        // Get parameters
+        String parameterString = "";
+        if (result.getParameters() != null && !result.getParameters().isEmpty()) {
+            for (final Map.Entry<String, JsonElement> entry : result.getParameters().entrySet()) {
+                parameterString += "(" + entry.getKey() + ", " + entry.getValue() + ") ";
+            }
+        }
+
+        // Show results in TextView.
+        resultTextView.setText("Query:" + result.getResolvedQuery() +
+                "\nAction: " + result.getAction() +
+                "\nParameters: " + parameterString);
+
     }
 
     @Override
