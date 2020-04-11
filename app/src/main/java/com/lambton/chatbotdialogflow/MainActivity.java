@@ -13,11 +13,13 @@ import ai.api.model.Result;
 
 public class MainActivity extends AppCompatActivity implements AIListener {
 
+    private AIService aiService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
     }
 
     @Override
