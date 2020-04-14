@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity implements AIListener {
         aiService = AIService.getService(this, config);
         aiService.setListener(this);
         requestAudioPermissions();
-
-
     }
 
     @Override
@@ -69,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements AIListener {
                 "\nResponse: " + response.getResult().getFulfillment().getSpeech()+
                 "\nAction: " + result.getAction() +
                 "\nParameters: " + parameterString);
-
     }
 
     @Override
@@ -134,7 +131,6 @@ public class MainActivity extends AppCompatActivity implements AIListener {
         aiService.startListening();
     }
 
-
     //Handling callback
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -154,6 +150,4 @@ public class MainActivity extends AppCompatActivity implements AIListener {
             }
         }
     }
-
-
 }
