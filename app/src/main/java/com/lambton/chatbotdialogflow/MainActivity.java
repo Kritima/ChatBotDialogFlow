@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.gson.JsonElement;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -61,6 +62,16 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 sendMessage(v);
+                resultTextView
+            }
+        });
+
+        textToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    textToSpeech.setLanguage(Locale.UK);
+                }
             }
         });
     }
@@ -99,6 +110,7 @@ public class MainActivity extends AppCompatActivity  {
             resultTextView.setText("There was some communication issue. Please Try again!");
         }
     }
+    
 
 
 }
