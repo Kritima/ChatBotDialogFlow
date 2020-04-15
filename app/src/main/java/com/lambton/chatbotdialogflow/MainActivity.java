@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
@@ -34,12 +35,14 @@ import ai.api.model.Result;
 
 public class MainActivity extends AppCompatActivity  {
 
-    private String uuid = UUID.randomUUID().toString();
     private static final String TAG = MainActivity.class.getSimpleName();
+    private String uuid = UUID.randomUUID().toString();
 
     Button submitButton;
-    private TextView resultTextView;
+    TextView resultTextView;
     EditText queryEditText;
+    TextToSpeech textToSpeech;
+
     private AIRequest aiRequest;
     private AIDataService aiDataService;
     private AIServiceContext customAIServiceContext;
