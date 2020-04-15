@@ -1,0 +1,20 @@
+[
+  {
+    "value": "Coke",
+    "synonyms": [
+      "Coke"
+    ]
+  },
+  {
+    "value": "Sprite",
+    "synonyms": [
+      "Sprite"
+    ]
+  },
+  {
+    "value": "Ginger Ale",
+    "synonyms": [
+      "Ginger Ale"
+    ]
+  }
+]
