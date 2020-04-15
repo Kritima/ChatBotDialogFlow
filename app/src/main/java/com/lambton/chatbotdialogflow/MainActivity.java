@@ -110,7 +110,14 @@ public class MainActivity extends AppCompatActivity  {
             resultTextView.setText("There was some communication issue. Please Try again!");
         }
     }
-    
+
+    public void onPause(){
+        if(textToSpeech !=null){
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
+        super.onPause();
+    }
 
 
 }
