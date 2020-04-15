@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.google.gson.JsonElement;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
@@ -62,7 +64,8 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 sendMessage(v);
-                resultTextView
+                String toSpeak = resultTextView.getText().toString();
+                textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
 
@@ -119,5 +122,22 @@ public class MainActivity extends AppCompatActivity  {
         super.onPause();
     }
 
+    public  String loadJSONFromAsset()
+    {
+        String json;
+        try {
+            InputStream inputStream = getAssets().open("customer.json");
+            int size = inputStream.available();
+            byte[] buffer = new byte[size];
+            inputStream.read(buffer);
+            inputStream.close();
+            json = new String(buffer);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return json;
+    }
 
 }
