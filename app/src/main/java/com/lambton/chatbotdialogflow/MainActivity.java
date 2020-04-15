@@ -18,8 +18,13 @@ import android.widget.Toast;
 
 import com.google.gson.JsonElement;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
@@ -45,6 +50,8 @@ public class MainActivity extends AppCompatActivity  {
     TextView resultTextView;
     EditText queryEditText;
     TextToSpeech textToSpeech;
+    TextView test;
+    private ArrayList<String> entityArrayList;
 
     private AIRequest aiRequest;
     private AIDataService aiDataService;
@@ -58,8 +65,10 @@ public class MainActivity extends AppCompatActivity  {
         submitButton = findViewById(R.id.button);
         resultTextView = findViewById(R.id.textView);
         queryEditText = findViewById(R.id.editText);
+        test = findViewById(R.id.textView6);
 
        initChatbot();
+       processJson();
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +86,7 @@ public class MainActivity extends AppCompatActivity  {
                 }
             }
         });
+
     }
 
     private void initChatbot() {
@@ -103,15 +113,27 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     public void callback(AIResponse aiResponse) {
+
+        Result result = aiResponse.getResult();
+
         if (aiResponse != null) {
             // process aiResponse here
             String botReply = aiResponse.getResult().getFulfillment().getSpeech();
             Log.d(TAG, "Bot Reply: " + botReply);
            resultTextView.setText(botReply);
+
+           /* String parameterString = "";
+            if (result.getParameters() != null && !result.getParameters().isEmpty()) {
+                for (final Map.Entry<String, JsonElement> entry : result.getParameters().entrySet()) {
+                    parameterString += "(" + entry.getKey() + ", " + entry.getValue() + ") ";
+                }
+            }*/
+
         } else {
             Log.d(TAG, "Bot Reply: Null");
             resultTextView.setText("There was some communication issue. Please Try again!");
         }
+        
     }
 
     public void onPause(){
@@ -126,7 +148,7 @@ public class MainActivity extends AppCompatActivity  {
     {
         String json;
         try {
-            InputStream inputStream = getAssets().open("customer.json");
+            InputStream inputStream = getAssets().open("drinks.json");
             int size = inputStream.available();
             byte[] buffer = new byte[size];
             inputStream.read(buffer);
@@ -140,4 +162,25 @@ public class MainActivity extends AppCompatActivity  {
         return json;
     }
 
-}
+    private void processJson()
+    {
+        String js = loadJSONFromAsset();
+        if(js !=null)
+        {
+            try {
+                JSONArray mJSONArray=new JSONArray(js);
+                entityArrayList = new ArrayList<>();
+                for(int i=0;i<mJSONArray.length();i++) {
+                    JSONObject mJSONObj=mJSONArray.getJSONObject(i);
+                    if(mJSONObj.has("value")) {
+                        String id = mJSONObj.getString("value");
+                        entityArrayList.add(id);
+                    }
+                }
+                } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            }
+        }
+    }
+
