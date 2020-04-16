@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity  {
         submitButton = findViewById(R.id.button);
         resultTextView = findViewById(R.id.textView);
         queryEditText = findViewById(R.id.editText);
-        test = findViewById(R.id.textView6);
 
        initChatbot();
        processJson();
@@ -73,8 +72,6 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 sendMessage(v);
-                String toSpeak = resultTextView.getText().toString();
-                textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
 
@@ -121,6 +118,8 @@ public class MainActivity extends AppCompatActivity  {
             String botReply = aiResponse.getResult().getFulfillment().getSpeech();
             Log.d(TAG, "Bot Reply: " + botReply);
            resultTextView.setText(botReply);
+            String toSpeak = resultTextView.getText().toString();
+            textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
 
            /* String parameterString = "";
             if (result.getParameters() != null && !result.getParameters().isEmpty()) {
