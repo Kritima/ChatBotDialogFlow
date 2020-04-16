@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity  {
         submitButton = findViewById(R.id.button);
         resultTextView = findViewById(R.id.textView);
         queryEditText = findViewById(R.id.editText);
-        //test = findViewById(R.id.textView6);
+        test = findViewById(R.id.textView6);
 
        initChatbot();
        processJson();
@@ -133,6 +133,7 @@ public class MainActivity extends AppCompatActivity  {
             Log.d(TAG, "Bot Reply: Null");
             resultTextView.setText("There was some communication issue. Please Try again!");
         }
+        
     }
 
     public void onPause(){
